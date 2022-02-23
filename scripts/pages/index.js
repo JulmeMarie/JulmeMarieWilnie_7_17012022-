@@ -15,8 +15,8 @@ async function init() {
                initResultats(resultDOM);
           }
           else {
-               rechercheAvecForeach(resultDOM, this.value); 
-               //rechercheAvecFor(resultDOM, this.value); 
+               //rechercheAvecForeach(resultDOM, this.value); 
+               rechercheAvecFor(resultDOM, this.value); 
           }
      });
 }
