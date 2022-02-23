@@ -1,0 +1,190 @@
+header, section{
+    width: 85%;
+    margin: auto;
+}
+
+header{
+    width: 100%;
+    text-align: center;
+}
+.logo{
+    margin-top: 3rem;
+    width: 20%;
+    max-width: 20rem;
+}
+
+.recherche-principale{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.recherche-principale .form-control{
+    background-color: rgb(231, 231, 231) !important;
+    height:4rem;
+
+}
+
+.recherche-principale .btn{
+    background-color: rgb(231, 231, 231) !important;
+    font-size: 1.8rem;
+}
+
+.badges .badge{
+    border:solid white 2px;
+    border-radius: 50%;
+}
+
+.badges{
+    margin-bottom: 1rem;
+}
+
+.list-options {
+    display: flex;
+    flex-direction: row;
+}
+
+.list-options .input-group-prepend{
+    width: fit-content;
+    position: relative;
+    margin-right: 1rem;
+}
+
+.list-options .btn{
+    height: 3.5rem;
+}
+
+.btn-lightgreen{
+color: white;
+background-color: rgb(105, 216, 165);
+}
+
+.btn-orange{
+color: white;
+background-color: rgb(237, 100, 84);
+}
+
+.search-result{
+    display:flex;
+    flex-direction: row;
+    column-gap: 5%;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+
+
+.search-result .card{
+    width: 30%;
+    margin-bottom: 5%;
+    cursor: pointer;
+}
+
+.search-result .card-img-top {
+    width: 100%;
+    height: 10rem;
+    background-color: rgb(206, 200, 200);
+}
+
+.search-result .card-body{
+    background-color: rgb(245, 243, 243);
+}
+
+.search-result .card-text{
+
+    position: relative;
+}
+
+.card-text h5{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 70%;
+}
+
+.card-text .times{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.card-text .ingredients, .card-text .description{
+    width: 50%;
+    float: left;
+    font-size: 0.7rem;
+}
+
+.card-text .description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    padding-left: 0.5rem;
+}
+
+.card-text .ingredients ul{
+    margin: 0;
+    padding: 0;
+}
+
+.ingredients ul li{
+    list-style: none;
+}
+
+.dropdown-menu{
+    top: -0.4rem;
+    left: -0.2rem;
+}
+
+.dropdown-menu .fa{
+    position: absolute;
+    right: 1rem;
+    top:1rem;
+    color: white;
+    cursor: pointer;
+}
+
+
+#ingredients .dropdown-menu, #ingredients .dropdown-menu input{
+    background-color: #007bff;
+}
+
+#appareils .dropdown-menu, #appareils .dropdown-menu input {
+    background-color: rgb(105, 216, 165);
+}
+
+#ustensiles .dropdown-menu, #ustensiles .dropdown-menu input{
+    background-color: rgb(237, 100, 84);
+}
+
+.dropdown-menu input{
+    color:white;
+    border:none;
+    width:90%;
+    margin-left: 0.5rem;
+    padding-left: 1rem;
+}
+
+.dropdown-menu input::placeholder {
+    color: lightgray;
+}
+
+.dropdown-items{
+    display: flex;
+    width: 40rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.dropdown-item{
+    width: 30%;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+input:focus{
+    outline: 0 !important;
+    border: none;
+}
