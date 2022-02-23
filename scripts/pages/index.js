@@ -106,38 +106,53 @@ function fermerTousMenus() {
  * @param {*} resultDOM 
  * @param {*} criteria 
  */
-function rechercheAvecForeach(resultDOM, criteria) {
-     
+/**
+ * Cette fonction permet de faire la recherche avec la boucle for
+ * @param {*} resultDOM 
+ * @param {*} criteria 
+ */
+ function rechercheAvecFor(resultDOM, criteria) {
      if(criteria.length >=3) { //On commence la recherche à partir de 3 caractère saisis
+ 
           let filteredRecipes = new Array(); //Liste des Recettes filtrées
-          
-          let term = criteria.toLowerCase();//Convertir en minuscule
-          recipes.forEach(data => {
+ 
+          let term = criteria.toLowerCase();
+ 
+          for(let index = 0; index < recipes.length; index++) {
+               let data = recipes[index];
+               
                if(data.name.toLowerCase().includes(term)){//Recherche dans titre
                     filteredRecipes.push(data);
                }
-               else if(data.ingredients) { //Recherche dans ingrédients
-                    let filteredIngredients = data.ingredients.filter(objIngredient =>{
-                         return objIngredient.ingredient.toLowerCase().includes(term)
-                    });
-                    if(filteredIngredients.length > 0) {
-                         filteredRecipes.push(data);
+               else if(data.ingredients) { //recherche dans ingrédients
+                    
+                    let ingredientIsFound = false;
+                    
+                    let index = 0;
+                    while(!ingredientIsFound && index < data.ingredients.length) {
+                         
+                         let objIngredient = data.ingredients[index];
+                         if(objIngredient.ingredient.toLowerCase().includes(term)){
+                              filteredRecipes.push(data);
+                              ingredientIsFound = true;
+                         }
+                         index++;
                     }
                }
-               else if(data.description.toLowerCase().includes(term)) { //Recherche dans description
+               else if(data.description.toLowerCase().includes(term)) {//recherche dans description
                     filteredRecipes.push(data);
                }
-          });
-
+          }
+     
           resultDOM.innerHTML = "";//Réinit DOM
-          if(filteredRecipes.length > 0){ //Au moins un résultat trouvé
-               filteredRecipes.forEach(data => {
-                    let recette = new RecetteModel(data);
+          if(filteredRecipes.length > 0) { //Si au moins un résultat trouvé
+               for(let index = 0; index < filteredRecipes.length; index++) {
+                    let recette = new RecetteModel(filteredRecipes[index]);
                     resultDOM.insertAdjacentHTML("beforeend", recette.getCard());
-               });
+               }
           }
           else { //Pas de résultat
                resultDOM.innerHTML = "« Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
           }
      }
-}
+ }
