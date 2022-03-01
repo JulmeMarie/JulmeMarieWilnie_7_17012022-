@@ -27,7 +27,7 @@ async function init() {
      
      //On écoute le champ de recherche
      document.getElementsByName("recherche-recette")[0].addEventListener("input",function() {
-          initSearchByForeach(this.value); 
+          initSearchWithForeachLoop(this.value); 
           //rechercheAvecFor(this.value); 
      });
 }
@@ -292,7 +292,7 @@ function initAdvancedSearch() {
  * Cette fonction permet de faire la recherche avec foreach
  * @param {*} criteria 
  */
-function initSearchByForeach(criteria) {
+function initSearchWithForeachLoop(criteria) {
      filteredRecipes = factory.getListe()
      if(criteria.length >=3 ) { //On commence la recherche à partir de 3 caractère saisis
           
