@@ -133,13 +133,18 @@ function createItems(elementsList, elementDOM, elementTagsList, tagClassName) {
                tagDOM.append(buttonDOM);// affichage du tag créé
                
                elementTagsList.push(element);//ajout de l'élément à la liste des tags affichés
-               
+              
                initAdvancedSearch();//on lance la recherche
+
+               this.remove();//On supprime l'item de la liste
 
                //on écoute le clic permettant d'enlever le tag
                buttonDOM.getElementsByClassName("delete-tag")[0].addEventListener("click",function() {
                     buttonDOM.remove();//Suppression du tag (interface)
-                    
+
+                    //(re)ajout de l'item à la liste déroulante
+                    elementDOM.getElementsByClassName("dropdown-items")[0].append(itemDOM);
+
                     //suppression du tag (dans la liste des tags affichés)
                     elementTagsList.splice(elementTagsList.indexOf(element),1);
 
@@ -242,6 +247,7 @@ function initAdvancedSearch() {
 
      if(ingredientTagsList.length == 0  && appareilTagsList.length == 0 && ustensileTagsList.length == 0) {
           displayRecipes(filteredRecipes);
+          initDropdownLists();
      }
      else
      {         
