@@ -18,7 +18,7 @@
     <section>
         <!-- Another variation with a button -->
         <div class="input-group recherche-principale">
-            <input type="search" class="form-control" placeholder="Rechercher une recette" name="recherche-recette">
+            <input type="search" class="form-control" placeholder="Rechercher une recette" autocomplete="off" name="recherche-recette">
             <div class="input-group-append">
             <button class="btn" type="button">
                 <i class="fa fa-search"></i>
@@ -26,15 +26,13 @@
             </div>
         </div>
         <div class="badges">
-            <button type="button" class="btn btn-primary">
-                Coco <span class="badge text-light"><i class="fa fa-times"></i></span>
-              </button>
+            
         </div>
         <div class="list-options">
             <div class="input-group-prepend" id="ingredients">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ingrédients</button>
                 <div class="dropdown-menu">
-                  <input type="search" class="form-control" placeholder="Rechercher un ingrédient" name="recherche-ingredient">
+                  <input type="search" class="form-control" autocomplete="off" placeholder="Rechercher un ingrédient" name="recherche-ingredient">
                   <i class="fa fa-chevron-up"></i>
                   <!-- ici la liste des ingrédients-->
                   <div class="dropdown-items"></div>
@@ -44,7 +42,7 @@
               <div class="input-group-prepend" id="appareils">
                 <button class="btn btn-lightgreen dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Appareils</button>
                 <div class="dropdown-menu">
-                  <input type="search" class="form-control" placeholder="Rechercher un appareil" name="recherche-ingredient">
+                  <input type="search" class="form-control" autocomplete="off" placeholder="Rechercher un appareil" name="recherche-appareil">
                   <i class="fa fa-chevron-up"></i>
 
                   <div class="dropdown-items">
@@ -57,7 +55,7 @@
               <div class="input-group-prepend" id="ustensiles">
                 <button class="btn btn-orange dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ustensiles</button>
                 <div class="dropdown-menu">
-                  <input type="search" class="form-control" placeholder="Rechercher un ustensile" name="recherche-ingredient">
+                  <input type="search" class="form-control" autocomplete="off" placeholder="Rechercher un ustensile" name="recherche-ustensile">
                   <i class="fa fa-chevron-up"></i>
                   
                   <div class="dropdown-items">
@@ -73,7 +71,6 @@
 
     <script src="scripts/models/recette.js" type="text/javascript"></script>
     <script src="scripts/factories/recette.js" type="text/javascript"></script>
-
     <script src="scripts/pages/index.js" type="text/javascript"></script>
 </body>
 </html>
