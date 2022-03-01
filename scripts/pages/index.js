@@ -101,11 +101,7 @@ function fermerTousMenus() {
      document.getElementById("ustensiles").getElementsByClassName("dropdown-menu")[0].style.display = "none"; 
 }
 
-/**
- * Cette fonction permet de faire la recherche avec foreach
- * @param {*} resultDOM 
- * @param {*} criteria 
- */
+
 /**
  * Cette fonction permet de faire la recherche avec la boucle for
  * @param {*} resultDOM 
