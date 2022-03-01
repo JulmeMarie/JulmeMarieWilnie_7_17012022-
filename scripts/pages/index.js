@@ -283,11 +283,12 @@ function initAdvancedSearch() {
                }
                return notMatch;
           });
-
-          displayRecipes(localFilterdRecipes);
      
           if(localFilterdRecipes.length == 0) {
                document.getElementsByName("recherche-recette")[0].dispatchEvent(new Event('input', {bubbles:true}));
+          }
+          else {
+               displayRecipes(localFilterdRecipes);
           }
      }
 }
