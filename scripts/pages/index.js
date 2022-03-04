@@ -1,15 +1,15 @@
 //Variable permertant de stocker les recettes filtrées
-var filteredRecipes = new Array();
+var filteredRecipes = [];
 
 //Variables permetant de stocker les tags (mots clé) choisis par l'utilisateur
-var ingredientTagsList = new Array();
-var appareilTagsList = new Array();
-var ustensileTagsList = new Array();
+var ingredientTagsList = [];
+var appareilTagsList = [];
+var ustensileTagsList = [];
 
 //Variables permettant de stocker la liste des menus déroulantes (sans doublons)
-var noDuplicatedIngredientsList = new Array();
-var noDuplicatedAppliancesList = new Array();
-var noDuplicatedUstensilesList = new Array();
+var noDuplicatedIngredientsList = [];
+var noDuplicatedAppliancesList = [];
+var noDuplicatedUstensilesList = [];
 
 //Variable permettant de créer des objets model  (recetteModel)
 var factory = new RecetteFactory();
@@ -164,9 +164,9 @@ function createItems(elementsList, elementDOM, elementTagsList, tagClassName) {
 function initDropdownListItems() {
      
      //Réinitialisation des listes sans doublons
-     noDuplicatedIngredientsList = new Array();
-     noDuplicatedAppliancesList = new Array();
-     noDuplicatedUstensilesList = new Array();
+     noDuplicatedIngredientsList = [];
+     noDuplicatedAppliancesList = [];
+     noDuplicatedUstensilesList = [];
 
      //On boucle sur la liste des recettes
      for(let index = 0; index < filteredRecipes.length; index++){
@@ -223,7 +223,7 @@ function initDropdownListItems() {
 function initDropdownListSearch() {
 
      document.getElementsByName("recherche-ingredient")[0].addEventListener("input",function(event) {
-          let filterdIngredientsList = new Array();
+          let filterdIngredientsList = [];
           let index = 0;
           while(index < noDuplicatedIngredientsList.length) {
                if(noDuplicatedIngredientsList[index].toLowerCase().includes(event.target.value.toLowerCase())){
@@ -237,7 +237,7 @@ function initDropdownListSearch() {
      });
 
      document.getElementsByName("recherche-appareil")[0].addEventListener("input",function(event) {
-          let filterAppareilsList = new Array();
+          let filterAppareilsList = [];
           let index = 0;
           while(index < noDuplicatedAppliancesList.length) {
                if(noDuplicatedAppliancesList[index].toLowerCase().includes(event.target.value.toLowerCase())) {
@@ -251,7 +251,7 @@ function initDropdownListSearch() {
      });
 
      document.getElementsByName("recherche-ustensile")[0].addEventListener("input",function(event) {
-          let filterdUstensilesList = new Array();
+          let filterdUstensilesList = [];
           let index = 0;
           while (index < noDuplicatedUstensilesList.length ) {
                if (noDuplicatedUstensilesList[index].toLowerCase().includes(event.target.value.toLowerCase())) {
@@ -277,7 +277,7 @@ function initAdvancedSearch() {
      }
      else
      {         
-          let localFilterdRecipes = new Array();
+          let localFilterdRecipes = [];
           for(let index = 0; index < filteredRecipes.length; index++) {
                let recette = filteredRecipes[index];
                let indexIngredient = 0;
@@ -307,8 +307,8 @@ function initAdvancedSearch() {
           }
 
           //console.log(localFilterdRecipes);
-          let noDuplicatedFilteredRecipes = new Array(); //Recettes triées sans doublon
-          let recipesName = new Array();
+          let noDuplicatedFilteredRecipes = []; //Recettes triées sans doublon
+          let recipesName = [];
           for(let index = 0; index < localFilterdRecipes.length; index++) {
                if(!recipesName.includes(localFilterdRecipes[index].getName())) {
                     noDuplicatedFilteredRecipes.push(localFilterdRecipes[index]);
@@ -335,7 +335,7 @@ function initAdvancedSearch() {
      
      if(criteria.length >=3) { //On commence la recherche à partir de 3 caractère saisis
  
-          let localFilteredRecipes = new Array(); //Liste des Recettes filtrées selon le critère choisi(à remplir)
+          let localFilteredRecipes = []; //Liste des Recettes filtrées selon le critère choisi(à remplir)
           let term = criteria.toLowerCase();
  
           for(let index = 0; index < filteredRecipes.length; index++) {
