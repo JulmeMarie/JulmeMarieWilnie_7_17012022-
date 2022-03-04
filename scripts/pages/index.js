@@ -1,15 +1,15 @@
 //Variable permertant de stocker les recettes filtrées
-var filteredRecipes = new Array();
+var filteredRecipes = [];
 
 //Variables permetant de stocker les tags (mots clé) choisis par l'utilisateur
-var ingredientTagsList = new Array();
-var appareilTagsList = new Array();
-var ustensileTagsList = new Array();
+var ingredientTagsList = [];
+var appareilTagsList = [];
+var ustensileTagsList = [];
 
 //Variables permettant de stocker la liste des menus déroulantes (sans doublons)
-var noDuplicatedIngredientsList = new Array();
-var noDuplicatedAppliancesList = new Array();
-var noDuplicatedUstensilesList = new Array();
+var noDuplicatedIngredientsList = [];
+var noDuplicatedAppliancesList = [];
+var noDuplicatedUstensilesList = [];
 
 //Variable permettant de créer des objets model  (recetteModel)
 var factory = new RecetteFactory();
@@ -159,9 +159,9 @@ function createItems(elementsList, elementDOM, elementTagsList, tagClassName) {
 function initDropdownListItems() {
      
      //Réinitialisation des listes sans doublons
-     noDuplicatedIngredientsList = new Array();
-     noDuplicatedAppliancesList = new Array();
-     noDuplicatedUstensilesList = new Array();
+     noDuplicatedIngredientsList = [];
+     noDuplicatedAppliancesList = [];
+     noDuplicatedUstensilesList = [];
 
      //On boucle sur la liste des recettes
      filteredRecipes.forEach(recette => {
@@ -274,7 +274,7 @@ function initAdvancedSearch() {
           let localFilterdRecipes  = filteredRecipesByIngredient.concat(filteredRecipesByAppliance,filteredRecipesByUstensil);
           
           //console.log(localFilterdRecipes);
-          let results = new Array();
+          let results = [];
           localFilterdRecipes = localFilterdRecipes.filter(recette =>{
                let notMatch = !results.includes(recette.getName())
                if(notMatch) {
