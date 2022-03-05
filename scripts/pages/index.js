@@ -121,7 +121,6 @@ function createItems(elementsList, elementDOM, elementTagsList, tagClassName) {
      for(let index = 0; index < elementsList.length; index++ ) {
           
           let element = elementsList[index];
-
           let itemDOM = document.createElement('a');//Création de l'item (balise a)
           itemDOM.setAttribute("href","#");
           itemDOM.className = 'dropdown-item'; //ajout de class  bootstrap
@@ -140,11 +139,9 @@ function createItems(elementsList, elementDOM, elementTagsList, tagClassName) {
                buttonDOM.className = `btn ${tagClassName}`;
                buttonDOM.innerHTML = `${element} <span class="badge text-light"> <i class="delete-tag fa fa-times"></i></span>`;
                tagDOM.append(buttonDOM);// affichage du tag créé
-               
                elementTagsList.push(element);//ajout de l'élément à la liste des tags affichés
               
                initAdvancedSearch();//on lance la recherche
-
                this.remove();//On supprime l'item de la liste
 
                //on écoute le clic permettant d'enlever le tag
@@ -156,7 +153,6 @@ function createItems(elementsList, elementDOM, elementTagsList, tagClassName) {
 
                     //suppression du tag (dans la liste des tags affichés)
                     elementTagsList.splice(elementTagsList.indexOf(element),1);
-
                     initAdvancedSearch();//On lance la recherche
                });
           });
@@ -339,26 +335,21 @@ function initAdvancedSearch() {
      filteredRecipes = factory.getListe();
      
      if(criteria.length >=3) { //On commence la recherche à partir de 3 caractère saisis
- 
           let localFilteredRecipes = []; //Liste des Recettes filtrées selon le critère choisi(à remplir)
           let term = criteria.toLowerCase();
- 
           for(let index = 0; index < filteredRecipes.length; index++) {
                
                let recipe = filteredRecipes[index];
-               
                if(recipe.getName().toLowerCase().includes(term)){//Recherche dans titre
                     localFilteredRecipes.push(recipe);
                }
                //Si pas trouvé dans titre, alors on cherche dans la liste d'ingrédients
                else if(recipe.getIngredients()) { 
-                    
                     let ingredientsList = recipe.getIngredients(); //List d'ingrédient de la recette en cours
                     let index = 0;
 
                     //Tant que l'index est inférieur à la longueur du tableau d'ingrédients de la recette, on continue
                     while(index < ingredientsList.length) {
-                         
                          let objIngredient = ingredientsList[index];
 
                          //Si cet ingrédient correspond au critère de recherche, alors on ajoute la recette
