@@ -397,8 +397,8 @@ function initAdvancedSearch() {
   */
  function arrayToLowerCase(inputArray) {
      let outputArray = [];
-     inputArray.forEach(element => {
-          outputArray.push(element.toLowerCase());
-     });
+     for(let index = 0; index < inputArray.length; index++) {
+          outputArray.push(inputArray[index].toLowerCase());
+     }
      return outputArray;
 }
