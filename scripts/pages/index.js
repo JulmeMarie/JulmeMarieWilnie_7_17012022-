@@ -330,8 +330,7 @@ function initSearch(criteria) {
                     return recette.getDescription().toLowerCase().includes(term); //Recherche dans descriptio 
                }
           });
-          initDropdownLists(filteredRecipes);
-          displayRecipes(filteredRecipes);
+          initAdvancedSearch();
      }
      else if(criteria.length == 0) {
           initAdvancedSearch();
