@@ -20,10 +20,8 @@ var factory = new RecetteFactory();
 async function init() {
 
      filteredRecipes = factory.getListe();
-
      displayRecipes(filteredRecipes); //Initialisation de l'interface contenant les recettes
-
-     initDropdownLists();//initialisation des liste déroulantes
+     initDropdownLists(filteredRecipes);//initialisation des liste déroulantes
      
      //On écoute le champ de recherche
      document.getElementsByName("recherche-recette")[0].addEventListener("input",function() {
@@ -35,22 +33,29 @@ init();//initialisation de la page index.html
 
 /**
  * Cette fonction permet d'initialiser l'interface contenant les recettes
+ * @param {*} recipesList 
  */
 function displayRecipes(recipesList) {
      const resultDOM = document.querySelector(".search-result");
-     resultDOM.innerHTML = "";
-     //Je boucle sur la liste des recettes
-     for(let index = 0; index < recipesList.length; index++) {
-          resultDOM.insertAdjacentHTML("beforeend", recipesList[index].getCard());
-     } 
+     if(recipesList.length == 0) { //Pas de résultat
+          resultDOM.innerHTML = "« Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
+     }
+     else {
+          resultDOM.innerHTML = "";
+          //Je boucle sur la liste des recettes
+          for(let index = 0; index < recipesList.length; index++) {
+               resultDOM.insertAdjacentHTML("beforeend", recipesList[index].getCard());
+          } 
+     }
 }
 
 
 /**
  * Cette fonction permet d'initialiser les filtres par mots clés
+ * @param {*} recipesList 
  */
-function initDropdownLists() {
-     initDropdownListItems();
+function initDropdownLists(recipesList) {
+     initDropdownListItems(recipesList);
      initDropdownListSearch();
 
      //Récupération DOM
@@ -159,18 +164,19 @@ function createItems(elementsList, elementDOM, elementTagsList, tagClassName) {
 }
 
 /**
- * Cette méthode permet de créer les items des menus "liste déroulante"
+ * Cette méthode permet de créer les items des menus "liste déroulante" 
+ * @param {*} recipesList 
  */
-function initDropdownListItems() {
+function initDropdownListItems(recipesList) {
      
      //Réinitialisation des listes sans doublons
      noDuplicatedIngredientsList = [];
      noDuplicatedAppliancesList = [];
      noDuplicatedUstensilesList = [];
-
+     
      //On boucle sur la liste des recettes
-     for(let index = 0; index < filteredRecipes.length; index++){
-          let recette = filteredRecipes[index];
+     for(let index = 0; index < recipesList.length; index++){
+          let recette = recipesList[index];
 
           let ingredientsList = recette.getIngredients();
           
@@ -178,25 +184,29 @@ function initDropdownListItems() {
           for(let index = 0; index < ingredientsList.length; index++){
                let objIngredient = ingredientsList[index];
 
-               //Je transform mon array "noDuplicatedIngredientsList" en String
-               //je mets la chaine en minuscule
                //Je cherche l'ingredient encours dedans grâce à la méthode includes()
-               if(!noDuplicatedIngredientsList.join('_').toLowerCase().includes(objIngredient.ingredient.toLowerCase())){
-          
+               if(!arrayToLowerCase(noDuplicatedIngredientsList).includes(objIngredient.ingredient.toLowerCase())){
+                    
+                    if(!arrayToLowerCase(ingredientTagsList).includes(objIngredient.ingredient.toLowerCase())){
                     //Ingrédient pas trouvé, alors je l'ajoute à la liste
                     noDuplicatedIngredientsList.push(objIngredient.ingredient);
+                    }
                }
           }
 
-          if(!noDuplicatedAppliancesList.join('_').toLowerCase().includes(recette.getAppliance().toLowerCase())) {
-               noDuplicatedAppliancesList.push(recette.getAppliance());
+          if(!arrayToLowerCase(noDuplicatedAppliancesList).includes(recette.getAppliance().toLowerCase())) {
+               if(!arrayToLowerCase(appareilTagsList).includes(recette.getAppliance().toLowerCase())){
+                    noDuplicatedAppliancesList.push(recette.getAppliance());
+               }
           }
 
           let ustensilsList = recette.getUstensils();
           for( let index = 0; index < ustensilsList.length; index++) {
                let ustensil = ustensilsList[index];
-               if(!noDuplicatedUstensilesList.join('_').toLowerCase().includes(ustensil.toLowerCase())) {
-                    noDuplicatedUstensilesList.push(ustensil);
+               if(!arrayToLowerCase(noDuplicatedUstensilesList).includes(ustensil.toLowerCase())) {
+                    if(!arrayToLowerCase(ustensileTagsList).includes(ustensil.toLowerCase())) {
+                         noDuplicatedUstensilesList.push(ustensil);
+                    }
                }
           }
      }
@@ -269,62 +279,57 @@ function initDropdownListSearch() {
  * Cette méthode permet de lancer la recherche avancée (recherche lancée avec des mots clés)
  */
 function initAdvancedSearch() {
-
-     //Si aucun tag sélectionné alors, on affiche la liste des recette et on initialise les items des liste déroulantes
+     
      if(ingredientTagsList.length == 0  && appareilTagsList.length == 0 && ustensileTagsList.length == 0) {
           displayRecipes(filteredRecipes);
-          initDropdownLists();
+          initDropdownLists(filteredRecipes);
      }
      else
-     {         
-          let localFilterdRecipes = [];
+     {  
+          let localFilterdRecipes  = []; //Tableau permettant de stocker les recettes triées
+          //On boucle sur la liste des recettes en cours
           for(let index = 0; index < filteredRecipes.length; index++) {
-               let recette = filteredRecipes[index];
-               let indexIngredient = 0;
+               let recipe = filteredRecipes[index];
 
-               while(indexIngredient < ingredientTagsList.length) {//filtre par ingrédient
-                    if(recette.hasIngredient(ingredientTagsList[indexIngredient])) {
-                         localFilterdRecipes.push(recette);
+               let matchValues = 0;//variable qui sera incrémenter selon le nombre d'élément qui matche
+               for(let indexIngredient = 0; indexIngredient < ingredientTagsList.length; indexIngredient++) {
+                    if(recipe.hasIngredient(ingredientTagsList[indexIngredient])) {
+                         matchValues++;
                     }
-                    indexIngredient++;
                }
-
-               let indexAppliance = 0;
-               while (indexAppliance < appareilTagsList.length) {
-                    if(recette.hasAppliance(appareilTagsList[indexAppliance])) {
-                         localFilterdRecipes.push(recette);
+              
+               //Si le nombre de tags d'ingrédients correspond aux nombre de match, 
+               //alors on procède à la vérification sur les appreils
+               if(ingredientTagsList.length == matchValues) {
+                    matchValues = 0;
+                    for(let indexAppliance = 0; indexAppliance < appareilTagsList.length; indexAppliance++) {
+                         if(recipe.hasAppliance(appareilTagsList[indexAppliance])){
+                              matchValues++;
+                         }
                     }
-                    indexAppliance++;
-               }
+                   
+                    //Si le nombre de tags d'appareils correspond au nombre de matchs
+                    //Alors on procède à la vérification sur les ustensils
+                    if(appareilTagsList.length == matchValues) {
+                         matchValues = 0;
+                         for(let indexUstensil = 0; indexUstensil < ustensileTagsList.length; indexUstensil++) {
+                              if(recipe.hasUstensile(ustensileTagsList[indexUstensil])){
+                                   matchValues++;
+                              }
+                         }
 
-               let indexUstensil = 0;
-               while (indexUstensil < ustensileTagsList.length) {
-                    if(recette.hasUstensile(ustensileTagsList[indexUstensil])) {
-                         localFilterdRecipes.push(recette); 
+                         //Si le nombre de tags des ustensiles correspond au nombre de matchs
+                         //Alors on peut conclure que cette recette contient tous les tags
+                         if(ustensileTagsList.length == matchValues) {
+                              localFilterdRecipes.push(recipe);
+                         }
                     }
-                    indexUstensil++;
                }
           }
-
-          //console.log(localFilterdRecipes);
-          let noDuplicatedFilteredRecipes = []; //Recettes triées sans doublon
-          let recipesName = [];
-          for(let index = 0; index < localFilterdRecipes.length; index++) {
-               if(!recipesName.includes(localFilterdRecipes[index].getName())) {
-                    noDuplicatedFilteredRecipes.push(localFilterdRecipes[index]);
-                    recipesName.push(localFilterdRecipes[index].getName());
-               }
-          }
-     
-          if(localFilterdRecipes.length == 0) {
-               document.getElementsByName("recherche-recette")[0].dispatchEvent(new Event('input', {bubbles:true}));
-          }
-          else {
-               displayRecipes(noDuplicatedFilteredRecipes);
-          }
+          displayRecipes(localFilterdRecipes);
+          initDropdownLists(localFilterdRecipes);
      }
 }
-
 
 /**
  * Cette fonction permet de faire la recherche avec la "boucle for"
@@ -372,7 +377,7 @@ function initAdvancedSearch() {
           }
           
           filteredRecipes = localFilteredRecipes;
-          initDropdownLists();
+          initDropdownLists(localFilteredRecipes);
           if(filteredRecipes.length > 0){ //Au moins un résultat trouvé
                displayRecipes(filteredRecipes);
           }
@@ -384,3 +389,16 @@ function initAdvancedSearch() {
           initAdvancedSearch();
      }
  }
+
+ /**
+  * Cette fonction permet de convertir un tableau de chaînes de caractère en minuscule
+  * @param {*} inputArray 
+  * @returns 
+  */
+ function arrayToLowerCase(inputArray) {
+     let outputArray = [];
+     inputArray.forEach(element => {
+          outputArray.push(element.toLowerCase());
+     });
+     return outputArray;
+}
