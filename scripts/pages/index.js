@@ -375,15 +375,8 @@ function initAdvancedSearch() {
                     localFilteredRecipes.push(recipe);
                }
           }
-          
           filteredRecipes = localFilteredRecipes;
-          initDropdownLists(localFilteredRecipes);
-          if(filteredRecipes.length > 0){ //Au moins un résultat trouvé
-               displayRecipes(filteredRecipes);
-          }
-          else { //Pas de résultat
-               document.querySelector(".search-result").innerHTML = "« Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
-          }
+          initAdvancedSearch();
      }
      else if(criteria.length == 0) {//Si champ de recherche est vide, alors on initialise
           initAdvancedSearch();
