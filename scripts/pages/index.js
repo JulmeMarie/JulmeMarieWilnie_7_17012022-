@@ -34,17 +34,17 @@ init();//initialisation de la page index.html
 
 /**
  * Cette fonction permet d'initialiser l'interface contenant les recettes 
- * @param {*} filteredRecipes 
+ * @param {*} recipesList 
  */
-function displayRecipes(filteredRecipes) {
+function displayRecipes(recipesList) {
      const resultDOM = document.querySelector(".search-result");
-     if(filteredRecipes.length == 0) { //Pas de résultat
+     if(recipesList.length == 0) { //Pas de résultat
           resultDOM.innerHTML = "« Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
      }
      else {
           resultDOM.innerHTML = "";
           //Je boucle sur la liste des recettes
-          filteredRecipes.forEach(recette => {
+          recipesList.forEach(recette => {
                resultDOM.insertAdjacentHTML("beforeend", recette.getCard());
           }); 
      }
@@ -52,10 +52,10 @@ function displayRecipes(filteredRecipes) {
 
 /**
  * Cette fonction permet d'initialiser les filtres par mots clés
- * @param {*} filteredRecipes 
+ * @param {*} recipesList 
  */
-function initDropdownLists(filteredRecipes) {
-     initDropdownListItems(filteredRecipes);
+function initDropdownLists(recipesList) {
+     initDropdownListItems(recipesList);
      initDropdownListSearch();
 
      //Récupération DOM
@@ -161,9 +161,9 @@ function createItems(elementsList, elementDOM, elementTagsList, tagClassName) {
 
 /**
  * Cette méthode permet de créer les items des menus "liste déroulante"
- * @param {*} filteredRecipes 
+ * @param {*} recipesList 
  */
-function initDropdownListItems(filteredRecipes) {
+function initDropdownListItems(recipesList) {
      
      //Réinitialisation des listes sans doublons
      noDuplicatedIngredientsList = [];
@@ -171,7 +171,7 @@ function initDropdownListItems(filteredRecipes) {
      noDuplicatedUstensilesList = [];
      
      //On boucle sur la liste des recettes
-     filteredRecipes.forEach(recette => {
+     recipesList.forEach(recette => {
           
           //On boucle sur la liste d'ingrédients de la recette en cours
           recette.getIngredients().forEach(objIngredient => {
@@ -338,7 +338,12 @@ function initSearch(criteria) {
      }
 }
 
-function arrayToLowerCase(inputArray) {
+/**
+  * Cette fonction permet de convertir un tableau de chaînes de caractère en minuscule
+  * @param {*} inputArray 
+  * @returns 
+  */
+ function arrayToLowerCase(inputArray) {
      let outputArray = [];
      inputArray.forEach(element => {
           outputArray.push(element.toLowerCase());
