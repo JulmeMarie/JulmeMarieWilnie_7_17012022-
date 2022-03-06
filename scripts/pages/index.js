@@ -75,20 +75,20 @@ function initDropdownLists(recipesList) {
  */
 function initDropdownToggle(dropdownListDOM) {
      //Ecoute de clicks sur la liste déroulante
-     dropdownListDOM.getElementsByClassName("dropdown-toggle")[0].addEventListener("click", function() {
+     dropdownListDOM.getElementsByClassName("custom-dropdown-toggle")[0].addEventListener("click", function() {
           closeDropdownLists();
 
           //Affichage de la liste sur laquelle l'utilisateur a cliquée
           dropdownListDOM.getElementsByClassName("dropdown-menu")[0].style.display = "block"; 
 
           //Je cache le bouton sur lequel l'utilisateur a cliqué
-          dropdownListDOM.getElementsByClassName("dropdown-toggle")[0].style.width="39rem";
-          dropdownListDOM.getElementsByClassName("dropdown-toggle")[0].style.visibility="hidden";
+          dropdownListDOM.getElementsByClassName("custom-dropdown-toggle")[0].style.width="39rem";
+          dropdownListDOM.getElementsByClassName("custom-dropdown-toggle")[0].style.visibility="hidden";
 
           //Ecoute du clic sur le chevron permetant de fermer la liste déroulante
           dropdownListDOM.getElementsByClassName("fa-chevron-up")[0].addEventListener("click",function(){
-               dropdownListDOM.getElementsByClassName("dropdown-toggle")[0].style.width="";
-               dropdownListDOM.getElementsByClassName("dropdown-toggle")[0].style.visibility="visible";
+               dropdownListDOM.getElementsByClassName("custom-dropdown-toggle")[0].style.width="9rem";
+               dropdownListDOM.getElementsByClassName("custom-dropdown-toggle")[0].style.visibility="visible";
                dropdownListDOM.getElementsByClassName("dropdown-menu")[0].style.display = "none";
           });
      });
@@ -98,8 +98,8 @@ function initDropdownToggle(dropdownListDOM) {
  * Cette fonction utilitaire permet de fermer toutes les liste déroulantes
  */
  function closeDropdownLists() {
-     Array.from(document.getElementsByClassName("dropdown-toggle")).forEach(function(element) {
-          element.style.width="";
+     Array.from(document.getElementsByClassName("custom-dropdown-toggle")).forEach(function(element) {
+          element.style.width="9rem";
           element.style.visibility="visible";
      });
      

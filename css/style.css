@@ -193,3 +193,15 @@ input:focus{
     margin-right: 1rem;
     margin-bottom: 0.5rem;
 }
+
+.custom-dropdown-toggle{
+    width: 9rem;
+    position: relative;
+    text-align: left;
+}
+
+.custom-dropdown-toggle i{
+    position: absolute;
+    right: 1rem;
+    top:1.2rem;
+}
