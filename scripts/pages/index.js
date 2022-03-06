@@ -310,7 +310,7 @@ function initAdvancedSearch() {
  * @param {*} criteria 
  */
 function initSearch(criteria) {
-     filteredRecipes = factory.getListe()
+     filteredRecipes = factory.getListe();
      if(criteria.length >=3 ) { //On commence la recherche à partir de 3 caractère saisis
           
           let term = criteria.toLowerCase();//Convertir en minuscule
