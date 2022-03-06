@@ -264,9 +264,8 @@ function initAdvancedSearch() {
      }
      else
      {  
-          let localFilterdRecipes  = []; //Tableau permettant de stocker les recettes triées
-          //On boucle sur la liste des recettes en cours
-          filteredRecipes.forEach(recipe =>{
+          //On filtre sur la liste des recettes en cours
+          let localFilterdRecipes = filteredRecipes.filter(recipe =>{
 
                //La variable matchValues permet de stocker la liste (ingredients/appareils/Ustensils) 
                //qui correspond à la recette encours.
@@ -290,14 +289,10 @@ function initAdvancedSearch() {
                          matchValues = ustensileTagsList.filter(ustensileTag => {
                               return recipe.hasUstensile(ustensileTag);
                          });
-
-                         //Si la recette contient tous les ustensiles de la liste des tags,
-                         //Alors cette recette correspond bien à la recherche utilisateur
-                         if(matchValues.length == ustensileTagsList.length) {
-                              localFilterdRecipes.push(recipe);
-                         }
+                         return matchValues.length == ustensileTagsList.length;
                     }
                }
+               return false;
           });
 
           displayRecipes(localFilterdRecipes);
