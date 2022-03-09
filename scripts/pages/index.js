@@ -25,7 +25,7 @@ async function init() {
      
      //On écoute le champ de recherche
      document.getElementsByName("recherche-recette")[0].addEventListener("input",function() {
-          initSearch(this.value); 
+          initSearch(this.value.trim()); 
      });
 }
 
