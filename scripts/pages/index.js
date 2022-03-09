@@ -346,19 +346,19 @@ function initAdvancedSearch() {
                //Si pas trouvé dans titre, alors on cherche dans la liste d'ingrédients
                else if(recipe.getIngredients()) { 
                     let ingredientsList = recipe.getIngredients(); //List d'ingrédient de la recette en cours
-                    let index = 0;
+                    let indexIngredient = 0;
 
                     //Tant que l'index est inférieur à la longueur du tableau d'ingrédients de la recette, on continue
-                    while(index < ingredientsList.length) {
-                         let objIngredient = ingredientsList[index];
+                    while(indexIngredient < ingredientsList.length) {
+                         let objIngredient = ingredientsList[indexIngredient];
 
                          //Si cet ingrédient correspond au critère de recherche, alors on ajoute la recette
                          //à la liste localFilteredRecipes, puis on arrête la boucle
                          if(objIngredient.ingredient.toLowerCase().includes(term)){
                               localFilteredRecipes.push(recipe);
-                              index = ingredientsList.length;//Permet de stopper la boucle
+                              indexIngredient = ingredientsList.length;//Permet de stopper la boucle
                          }
-                         index++;
+                         indexIngredient++;
                     }
                }
                //Si pas trouvé dans titre, ni ingrédients, alors on recherche dans description
