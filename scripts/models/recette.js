@@ -77,20 +77,29 @@ class RecetteModel {
         if(!this.ustensils) {
             return false;
         }
-        let filteredUstebsiles = this.ustensils.filter(objUstensil => {
-            return objUstensil.toLowerCase() == ustensil.toLowerCase();
-        });
-        return filteredUstebsiles.length > 0;
+        let hasUstensile = false;
+        let index = 0;
+
+        while(!hasUstensile && index < this.ustensils.length) {
+            hasUstensile = this.ustensils[index].toLowerCase() == ustensil.toLowerCase();
+            index++;
+        }
+        return hasUstensile;
     }
 
     hasIngredient(ingredient) {
         if(!this.ingredients){
              return false;
         }
-        let filteredIngredients = this.ingredients.filter(objIngredient => {
-            return objIngredient.ingredient.toLowerCase() == ingredient.toLowerCase();
-        });
-        return filteredIngredients.length > 0;
+
+        let hasIngredient = false;
+        let index = 0;
+
+        while(!hasIngredient && index < this.ingredients.length ) {
+            hasIngredient = this.ingredients[index].ingredient.toLowerCase() == ingredient.toLowerCase();
+            index++;
+        }
+        return hasIngredient;
     }
 
     hasAppliance(appareil) {

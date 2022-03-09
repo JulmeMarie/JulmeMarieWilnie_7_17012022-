@@ -3,10 +3,10 @@ class RecetteFactory {
     
     constructor() {
         this.#listeRecettes = new Array();
-        
-        recipes.forEach(recipe => {
-            this.#listeRecettes.push(new RecetteModel(recipe));
-       });
+
+        for(let index = 0; index < recipes.length; index++) {
+            this.#listeRecettes.push(new RecetteModel(recipes[index]));
+        }
     }
 
     getListe() {
