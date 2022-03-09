@@ -21,7 +21,6 @@ async function init() {
 
      filteredRecipes = factory.getListe();
      displayRecipes(filteredRecipes); //Initialisation de l'interface contenant les recettes
-
      initDropdownLists(filteredRecipes);//initialisation des liste déroulantes
      
      //On écoute le champ de recherche
@@ -313,16 +312,14 @@ function initSearch(criteria) {
                if(recette.getName().toLowerCase().includes(term)){//Recherche dans titre
                     return true;
                }
-               else if(recette.getIngredients()) { //Recherche dans ingrédients
+               else if(recette.getDescription().toLowerCase().includes(term)){//Recherche dans description
+                    return true;
+               }
+               else { //Recherche dans ingrédients
                     let filteredIngredients = recette.getIngredients().filter(objIngredient =>{
                          return objIngredient.ingredient.toLowerCase().includes(term);
                     });
-                    if(filteredIngredients.length > 0) {
-                         return true;
-                    }
-               }
-               else{
-                    return recette.getDescription().toLowerCase().includes(term); //Recherche dans descriptio 
+                    return filteredIngredients.length > 0;
                }
           });
           initAdvancedSearch();
